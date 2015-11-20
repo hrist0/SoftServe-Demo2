@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>HR System</h1>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <p class="lead">You need to log in to use this app.</p>
+    }
+    else
+    {
+        <p class="lead">Welcome to your personal human resource management system.</p>
+    }
+</div>
