@@ -1,14 +1,19 @@
-﻿namespace SoftServe.Demo2.Models.EmployeesModel
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SoftServe.Demo2.Models.EmployeesModel
 {
     public enum Position
     {
-        CEO,
-        DeliveryDirector,
-        ProjectManager,
-        TeamLeader,
-        Senior,
-        Intermediate,
+        Trainee,
         Junior,
-        Trainee
+        Intermediate,
+        Senior,
+        [DisplayAttribute(Name = "Team Leader")]
+        TeamLeader,
+        [DisplayAttribute(Name = "Project Manager")]
+        ProjectManager,
+        [Display(Name = "Delivery Director")]
+        DeliveryDirector,
+        CEO
     }
 }

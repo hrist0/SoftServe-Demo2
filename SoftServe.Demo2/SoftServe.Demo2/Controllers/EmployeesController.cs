@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using SoftServe.Demo2.Models.EmployeeContext;
 using SoftServe.Demo2.Models.EmployeesModel;
+using PagedList;
+using System.Runtime.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace SoftServe.Demo2.Controllers
 {
@@ -16,10 +19,24 @@ namespace SoftServe.Demo2.Controllers
         private EmployeeDbContext db = new EmployeeDbContext();
 
         // GET: Employees
-        public ActionResult Index()
+        public ActionResult Index(string search, string sortOrder, int? page)
         {
-            var employees = db.Employees.Include(e => e.Project).Include(e => e.Team);
-            return View(employees.ToList());
+            var employees = db.Employees
+                .Include(e => e.Project)
+                .Include(e => e.Team)
+                .OrderBy(e => e.Id);
+
+            // Set page size and pages number
+            int pageSize = 15;
+            int pageNumber = (page ?? 1);
+
+            // Search employees by name, position, team or project
+            employees = SearchEmployees(search, employees);
+
+            // Order employees by some criteria
+            employees = OrderEmployees(sortOrder, employees);
+
+            return View(employees.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Employees/Details/5
@@ -50,7 +67,7 @@ namespace SoftServe.Demo2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Position,Salary,Workplace,Email,Phone,HomeAdress,ProjectId,TeamId")] Employee employee)
+        public ActionResult Create([Bind(Include = "Id,Name,Position,Salary,Workplace,Email,Phone,Address,ProjectId,TeamId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +94,7 @@ namespace SoftServe.Demo2.Controllers
                 return HttpNotFound();
             }
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "ProjectName", employee.ProjectId);
-            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", employee.TeamId);
+            ViewBag.TeamId = new SelectList(db.Teams.Where(t => t.ProjectId == employee.ProjectId), "Id", "Name", employee.TeamId);
             return View(employee);
         }
 
@@ -86,7 +103,7 @@ namespace SoftServe.Demo2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Position,Salary,Workplace,Email,Phone,HomeAdress,ProjectId,TeamId")] Employee employee)
+        public ActionResult Edit([Bind(Include = "Id,Name,Position,Salary,Workplace,Email,Phone,Address,ProjectId,TeamId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -132,6 +149,51 @@ namespace SoftServe.Demo2.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private static IOrderedQueryable<Employee> SearchEmployees(string search, IOrderedQueryable<Employee> employees)
+        {
+            if (!String.IsNullOrEmpty(search))
+            {
+                employees = employees.Where(e => e.Name.Contains(search)
+                    || e.Position.ToString().Contains(search)
+                    || e.Team.Name.Contains(search)
+                    || e.Project.ProjectName.Contains(search))
+                    .OrderBy(e => e.Project.ProjectName);
+            }
+            return employees;
+        }
+
+        private IOrderedQueryable<Employee> OrderEmployees(string sortOrder, IOrderedQueryable<Employee> employees)
+        {
+            ViewBag.NameSort = String.IsNullOrEmpty(sortOrder) ? "name" : "";
+            ViewBag.PositionSort = String.IsNullOrEmpty(sortOrder) ? "position" : "";
+            ViewBag.ProjectSort = String.IsNullOrEmpty(sortOrder) ? "project" : "";
+            ViewBag.TeamSort = String.IsNullOrEmpty(sortOrder) ? "team" : "";
+            ViewBag.WorkplaceSort = String.IsNullOrEmpty(sortOrder) ? "workplace" : "";
+
+            switch (sortOrder)
+            {
+                case "name":
+                    employees = employees.OrderBy(e => e.Name);
+                    break;
+                case "position":
+                    employees = employees.OrderBy(e => e.Position.ToString());
+                    break;
+                case "project":
+                    employees = employees.OrderBy(e => e.Project.ProjectName);
+                    break;
+                case "team":
+                    employees = employees.OrderBy(e => e.Team.Name);
+                    break;
+                case "workplace":
+                    employees = employees.OrderBy(e => e.Workplace);
+                    break;
+                default:
+                    employees = employees.OrderBy(e => e.Id);
+                    break;
+            }
+            return employees;
         }
     }
 }

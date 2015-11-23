@@ -10,7 +10,6 @@ namespace SoftServe.Demo2.Models.EmployeesModel
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Employee name is required")]
-        [DisplayName("Employee name")]
         [StringLength(35, MinimumLength = 3)]
         public string Name { get; set; }
 
@@ -27,19 +26,21 @@ namespace SoftServe.Demo2.Models.EmployeesModel
         [DataType(DataType.EmailAddress)]
         [DisplayName("Email address")]
         [RegularExpression(@"[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}", ErrorMessage = "Email address is not valid")]
-        [StringLength(50)]
+        [StringLength(35)]
         public string Email { get; set; }
 
         [DisplayName("Phone number")]
         public string Phone { get; set; }
 
-        [DisplayName("Home address")]
-        public string HomeAdress { get; set; }
+        [DisplayName("Address")]
+        public string Address { get; set; }
 
+        [ForeignKey("Project")]
         public int? ProjectId { get; set; }
 
         public virtual Project Project { get; set; }
 
+        [ForeignKey("Team")]
         public int? TeamId { get; set; }
 
         public virtual Team Team { get; set; }

@@ -14,6 +14,7 @@ namespace SoftServe.Demo2.Migrations
             this.AutomaticMigrationDataLossAllowed = true;
         }
 
+        // Seed database 
         protected override void Seed(EmployeeDbContext context)
         {
             if (!context.Projects.Any())
@@ -29,7 +30,7 @@ namespace SoftServe.Demo2.Migrations
                 SeedEmployees(context);
             }
         }
-
+        // Seed employees method
         private static void SeedEmployees(EmployeeDbContext context)
         {
             var employee = new List<Employee>{
@@ -41,7 +42,7 @@ namespace SoftServe.Demo2.Migrations
                     Workplace = "SoftServe Bulgaria",
                     Email = "f0ri@abv.bg",
                     Phone = "0999 99 55 33",
-                    HomeAdress = "Manastirski livadi",
+                    Address = "Manastirski livadi",
                     ProjectId = 1,
                     TeamId = 1
                 },
@@ -53,7 +54,7 @@ namespace SoftServe.Demo2.Migrations
                     Workplace = "SoftServe Bulgaria",
                     Email = "iliqn@abv.bg",
                     Phone = "0999 11 22 33",
-                    HomeAdress = "Center",
+                    Address = "Center",
                     ProjectId = 1,
                     TeamId = 1
                 },
@@ -65,7 +66,7 @@ namespace SoftServe.Demo2.Migrations
                     Workplace = "SoftServe Bulgaria",
                     Email = "damqn@abv.bg",
                     Phone = "0999 99 88 77",
-                    HomeAdress = "Center",
+                    Address = "Center",
                     ProjectId = 1,
                     TeamId = 1
                 },
@@ -77,7 +78,7 @@ namespace SoftServe.Demo2.Migrations
                     Workplace = "SoftServe Bulgaria",
                     Email = "boris@abv.bg",
                     ProjectId = 1,
-                    TeamId = 1
+                    TeamId = 2
                 },
                 new Employee
                 {
@@ -87,7 +88,7 @@ namespace SoftServe.Demo2.Migrations
                     Workplace = "SoftServe Bulgaria",
                     Email = "mitko@abv.bg",
                     ProjectId = 1,
-                    TeamId = 1
+                    TeamId = 2
                 },
                 new Employee
                 {
@@ -96,7 +97,7 @@ namespace SoftServe.Demo2.Migrations
                     Salary = 10000,
                     Workplace = "SoftServe Bulgaria",
                     Email = "juliqn@gmail.com",
-                    HomeAdress = "Sofia",
+                    Address = "Sofia",
                     ProjectId = 1,
                     TeamId = 1
                 },
@@ -107,9 +108,9 @@ namespace SoftServe.Demo2.Migrations
                     Salary = 10000,
                     Workplace = "SoftServe Ukraine",
                     Email = "desislav@gmail.com",
-                    HomeAdress = "Sofia",
+                    Address = "Sofia",
                     ProjectId = 2,
-                    TeamId = 2
+                    TeamId = 3
                 },
                 new Employee
                 {
@@ -118,9 +119,9 @@ namespace SoftServe.Demo2.Migrations
                     Salary = 10000,
                     Workplace = "SoftServe Ukraine",
                     Email = "vladimir@gmail.com",
-                    HomeAdress = "Ukraine",
+                    Address = "Ukraine",
                     ProjectId = 2,
-                    TeamId = 2
+                    TeamId = 3
                 },
                 new Employee
                 {
@@ -129,9 +130,9 @@ namespace SoftServe.Demo2.Migrations
                     Salary = 10000,
                     Workplace = "SoftServe Ukraine",
                     Email = "vitalii@gmail.com",
-                    HomeAdress = "Ukraine",
+                    Address = "Ukraine",
                     ProjectId = 2,
-                    TeamId = 2
+                    TeamId = 3
                 },
                 new Employee
                 {
@@ -140,7 +141,7 @@ namespace SoftServe.Demo2.Migrations
                     Salary = 15000,
                     Workplace = "SoftServe Ukraine",
                     Email = "john@gmail.com",
-                    HomeAdress = "Ukraine",
+                    Address = "Ukraine",
                     ProjectId = 1,
                     TeamId = 1
                 },
@@ -151,9 +152,9 @@ namespace SoftServe.Demo2.Migrations
                     Salary = 15000,
                     Workplace = "SoftServe Ukraine",
                     Email = "christopher@gmail.com",
-                    HomeAdress = "Ukraine",
+                    Address = "Ukraine",
                     ProjectId = 2,
-                    TeamId = 2
+                    TeamId = 3
                     
                 },
                 new Employee
@@ -163,7 +164,7 @@ namespace SoftServe.Demo2.Migrations
                     Salary = 15000,
                     Workplace = "SoftServe Ukraine",
                     Email = "adriy@gmail.com",
-                    HomeAdress = "Ukraine"
+                    Address = "Ukraine"
                 },
                 new Employee
                 {
@@ -172,7 +173,7 @@ namespace SoftServe.Demo2.Migrations
                     Salary = 20000,
                     Workplace = "SoftServe Ukraine",
                     Email = "oleh@gmail.com",
-                    HomeAdress = "Ukraine",                    
+                    Address = "Ukraine",                    
                 }};
 
             foreach (var item in employee)
@@ -182,12 +183,17 @@ namespace SoftServe.Demo2.Migrations
             context.SaveChanges();
         }
 
+        // Seed teams method
         private static void SeedTeams(EmployeeDbContext context)
         {
             var teams = new List<Team>{
               new Team
               {
-                  Name = "Hr system",
+                  Name = "HR system Back End",
+                  ProjectId = 1
+              },
+              new Team{
+                  Name = "HR system Front End",
                   ProjectId = 1
               },
               new Team
@@ -203,6 +209,7 @@ namespace SoftServe.Demo2.Migrations
             context.SaveChanges();
         }
 
+        // Seed projects method
         private static void SeedProjects(EmployeeDbContext context)
         {
             var projects = new List<Project>{

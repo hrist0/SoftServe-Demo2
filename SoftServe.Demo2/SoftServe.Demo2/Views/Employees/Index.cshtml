@@ -1,39 +1,41 @@
-﻿@model IEnumerable<SoftServe.Demo2.Models.EmployeesModel.Employee>
+﻿@model PagedList.IPagedList<SoftServe.Demo2.Models.EmployeesModel.Employee>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
+<h2>Human Resource Management System</h2>
+<span style="float:left; margin-top:10px; margin-bottom: 10px">
     @Html.ActionLink("Create New", "Create")
-</p>
+</span>
+
+@*Add searching buttons*@
+<span style="float:right; margin-top:10px; margin-bottom: 10px">
+    @using (Html.BeginForm())
+    {
+        @Html.TextBox("search")
+        <input type="submit" value="Search" />
+    }
+</span>
 <table class="table">
+    @*Options for sorting by different criteria*@
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Position)
+            @Html.ActionLink("Position", "Index", new { sortOrder = ViewBag.PositionSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Project.ProjectName)
+            @Html.ActionLink("Project name", "Index", new { sortOrder = ViewBag.ProjectSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Team.Name)
+            @Html.ActionLink("Team name", "Index", new { sortOrder = ViewBag.TeamSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Salary)
+            @Html.ActionLink("Workplace", "Index", new { sortOrder = ViewBag.WorkplaceSort })
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Workplace)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -52,13 +54,7 @@
                 @Html.DisplayFor(modelItem => item.Team.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Salary)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Workplace)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
@@ -69,3 +65,12 @@
     }
 
 </table>
+
+
+@*Add paging*@
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+

@@ -52,3 +52,8 @@ c:\Users\Turbo-X\Documents\Visual Studio 2013\Projects\SoftServe.Demo2\SoftServe
 c:\Users\Turbo-X\Documents\Visual Studio 2013\Projects\SoftServe.Demo2\SoftServe.Demo2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 c:\Users\Turbo-X\Documents\Visual Studio 2013\Projects\SoftServe.Demo2\SoftServe.Demo2\obj\Debug\SoftServe.Demo2.dll
 c:\Users\Turbo-X\Documents\Visual Studio 2013\Projects\SoftServe.Demo2\SoftServe.Demo2\obj\Debug\SoftServe.Demo2.pdb
+C:\Users\Turbo-X\Documents\Visual Studio 2013\Projects\SoftServe.Demo2\SoftServe.Demo2\bin\PagedList.dll
+C:\Users\Turbo-X\Documents\Visual Studio 2013\Projects\SoftServe.Demo2\SoftServe.Demo2\bin\PagedList.Mvc.dll
+C:\Users\Turbo-X\Documents\Visual Studio 2013\Projects\SoftServe.Demo2\SoftServe.Demo2\bin\PagedList.xml
+C:\Users\Turbo-X\Documents\Visual Studio 2013\Projects\SoftServe.Demo2\SoftServe.Demo2\bin\PagedList.Mvc.xml
+C:\Users\Turbo-X\Documents\Visual Studio 2013\Projects\SoftServe.Demo2\SoftServe.Demo2\obj\Debug\SoftServe.Demo2.csprojResolveAssemblyReference.cache

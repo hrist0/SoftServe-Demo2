@@ -1,0 +1,34 @@
+﻿@model Enum
+
+@if (EnumHelper.IsValidForEnumHelper(ViewData.ModelMetadata))
+{
+    // Display Enum using same names (from [Display] attributes)
+    string displayPosition = null;
+    foreach (SelectListItem item in EnumHelper.GetSelectList(ViewData.ModelMetadata, (Enum)Model))
+    {
+        if (item.Selected)
+        {
+            displayPosition = item.Text ?? item.Value;
+        }
+    }
+
+    // Handle the unexpected case that nothing is selected
+    if (String.IsNullOrEmpty(displayPosition))
+    {
+        if (Model == null)
+        {
+            displayPosition = String.Empty;
+        }
+        else
+        {
+            displayPosition = Model.ToString();
+        }
+    }
+
+    @Html.DisplayTextFor(model => displayPosition)
+}
+else
+{
+    // This Enum type is not supported.  Fall back to the text.
+    @Html.DisplayTextFor(model => model)
+}

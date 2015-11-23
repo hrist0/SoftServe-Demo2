@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Teams</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,7 +18,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Project.ProjectName)
         </th>
-        <th></th>
+        <th>
+            Team members
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -31,12 +33,17 @@
                 @Html.DisplayFor(modelItem => item.Project.ProjectName)
             </td>
 
-            @*<td>
-                    @foreach (var teamMember in item.Employees)
-                    {
-                        @Html.Label(teamMember.Name)
-                    }
-                </td>*@
+            @{List<string> members = new List<string>();
+            }
+            @foreach (var teamMember in item.Employees)
+            {
+                members.Add(teamMember.Name);
+            }
+            @{string allMembers = string.Join(", ", members);
+            }
+            <td>
+                @allMembers
+            </td>
 
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

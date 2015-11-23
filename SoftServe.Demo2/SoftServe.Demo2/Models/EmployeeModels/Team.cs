@@ -16,7 +16,7 @@ namespace SoftServe.Demo2.Models.EmployeesModel
 
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Team name is required")]
         [DisplayName("Team name")]
         public string Name { get; set; }
 
