@@ -6,12 +6,11 @@
 }
 
 <h2>Human Resource Management System</h2>
-<span style="float:left; margin-top:10px; margin-bottom: 10px">
-    @Html.ActionLink("Create New", "Create")
-</span>
+
+<button onclick="location='@Url.Action("Create")'" style="margin-bottom:10px; margin-top: 10px">Create New</button>
 
 @*Add searching buttons*@
-<span style="float:right; margin-top:10px; margin-bottom: 10px">
+<span style="float:right; margin-bottom:10px; margin-top: 10px">
     @using (Html.BeginForm())
     {
         @Html.TextBox("search")

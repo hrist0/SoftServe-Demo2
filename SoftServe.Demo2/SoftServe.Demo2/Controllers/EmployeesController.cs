@@ -94,7 +94,7 @@ namespace SoftServe.Demo2.Controllers
                 return HttpNotFound();
             }
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "ProjectName", employee.ProjectId);
-            ViewBag.TeamId = new SelectList(db.Teams.Where(t => t.ProjectId == employee.ProjectId), "Id", "Name", employee.TeamId);
+            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", employee.TeamId);
             return View(employee);
         }
 

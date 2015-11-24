@@ -111,14 +111,16 @@ namespace SoftServe.Demo2.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Project project = db.Projects.Find(id);
+            var teams = db.Teams.Where(t => t.ProjectId == id);
             foreach (var projectMember in project.Employees)
             {
                 projectMember.ProjectId = null;
             }
-            foreach (var projectMember in project.Teams)
+            foreach (var team in teams)
             {
-                projectMember.ProjectId = null;
+                db.Teams.Remove(team);
             }
+
             db.Projects.Remove(project);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -8,9 +8,9 @@ namespace SoftServe.Demo2.Models.EmployeesModel
         Junior,
         Intermediate,
         Senior,
-        [DisplayAttribute(Name = "Team Leader")]
+        [Display(Name = "Team Leader")]
         TeamLeader,
-        [DisplayAttribute(Name = "Project Manager")]
+        [Display(Name = "Project Manager")]
         ProjectManager,
         [Display(Name = "Delivery Director")]
         DeliveryDirector,
