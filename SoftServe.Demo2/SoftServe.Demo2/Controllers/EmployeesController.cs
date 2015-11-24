@@ -159,7 +159,8 @@ namespace SoftServe.Demo2.Controllers
                 employees = employees.Where(e => e.Name.Contains(search)
                     || e.Position.ToString().Contains(search)
                     || e.Team.Name.Contains(search)
-                    || e.Project.ProjectName.Contains(search))
+                    || e.Project.ProjectName.Contains(search)
+                    || e.Workplace.Contains(search))
                     .OrderBy(e => e.Project.ProjectName);
             }
             return employees;

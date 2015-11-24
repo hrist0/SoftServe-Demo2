@@ -1,14 +1,10 @@
 ﻿@model PagedList.IPagedList<SoftServe.Demo2.Models.EmployeesModel.Employee>
 @using PagedList.Mvc;
-
 @{
     ViewBag.Title = "Index";
 }
-
 <h2>Human Resource Management System</h2>
-
 <button onclick="location='@Url.Action("Create")'" style="margin-bottom:10px; margin-top: 10px">Create New</button>
-
 @*Add searching buttons*@
 <span style="float:right; margin-bottom:10px; margin-top: 10px">
     @using (Html.BeginForm())
@@ -36,7 +32,6 @@
             @Html.ActionLink("Workplace", "Index", new { sortOrder = ViewBag.WorkplaceSort })
         </th>
     </tr>
-
     @foreach (var item in Model)
     {
         <tr>
@@ -62,9 +57,7 @@
             </td>
         </tr>
     }
-
 </table>
-
 
 @*Add paging*@
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
