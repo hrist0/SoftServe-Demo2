@@ -151,6 +151,7 @@ namespace SoftServe.Demo2.Controllers
             base.Dispose(disposing);
         }
 
+        // Searching method by criteria
         private static IOrderedQueryable<Employee> SearchEmployees(string search, IOrderedQueryable<Employee> employees)
         {
             if (!String.IsNullOrEmpty(search))
@@ -164,6 +165,7 @@ namespace SoftServe.Demo2.Controllers
             return employees;
         }
 
+        // Ordering method by some criteria
         private IOrderedQueryable<Employee> OrderEmployees(string sortOrder, IOrderedQueryable<Employee> employees)
         {
             ViewBag.NameSort = String.IsNullOrEmpty(sortOrder) ? "name" : "";

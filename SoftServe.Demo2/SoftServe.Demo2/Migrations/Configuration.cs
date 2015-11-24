@@ -143,7 +143,6 @@ namespace SoftServe.Demo2.Migrations
                     Email = "john@gmail.com",
                     Address = "Ukraine",
                     ProjectId = 1,
-                    TeamId = 1
                 },
                 new Employee
                 {
@@ -153,9 +152,7 @@ namespace SoftServe.Demo2.Migrations
                     Workplace = "SoftServe Ukraine",
                     Email = "christopher@gmail.com",
                     Address = "Ukraine",
-                    ProjectId = 2,
-                    TeamId = 3
-                    
+                    ProjectId = 2,                    
                 },
                 new Employee
                 {
